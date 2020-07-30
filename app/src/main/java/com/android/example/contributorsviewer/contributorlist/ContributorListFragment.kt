@@ -31,12 +31,6 @@ class ContributorListFragment() : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        viewModel.contributors.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                binding.testText.text = it.toString()
-            }
-        })
-
         return binding.root
     }
 

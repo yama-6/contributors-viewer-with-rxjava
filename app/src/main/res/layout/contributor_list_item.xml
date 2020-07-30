@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="contributor"
+            type="com.android.example.contributorsviewer.data.model.Contributor" />
+
+        <variable
+            name="clickListener"
+            type="com.android.example.contributorsviewer.contributorlist.ContributorClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/spacing_large"
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingTop="@dimen/spacing_normal"
+        android:paddingBottom="@dimen/spacing_normal"
+        android:onClick="@{() -> clickListener.onClick(contributor)}">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/avatar_icon_container"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/avatar_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:imgUrl="@{contributor.avatarUrl}"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@{contributor.userName}"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatar_icon_container"
+            app:layout_constraintTop_toTopOf="@+id/avatar_icon_container"
+            tools:text="TextViewTextViewTextViewTextViewTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
