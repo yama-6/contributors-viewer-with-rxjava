@@ -1,6 +1,6 @@
-package com.android.example.contributorsviewer.api
+package com.android.example.contributorsviewer.data.api
 
-import com.android.example.contributorsviewer.api.dto.ContributorDto
+import com.android.example.contributorsviewer.data.api.dto.ContributorDto
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
