@@ -2,7 +2,7 @@ package com.android.example.contributorsviewer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.android.example.contributorsviewer.api.GithubApi
+import com.android.example.contributorsviewer.data.api.GithubApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
