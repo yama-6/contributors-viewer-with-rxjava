@@ -39,8 +39,8 @@ class ContributorViewHolder private constructor(private val binding: Contributor
     }
 }
 
-class ContributorClickListener(val clickListener: (Contributor: Contributor) -> Unit) {
-    fun onClick(contributor: Contributor) = clickListener(contributor)
+class ContributorClickListener(val callback: (Contributor: Contributor) -> Unit) {
+    fun onClick(contributor: Contributor) = callback(contributor)
 }
 
 class ContributorDiffCallback : DiffUtil.ItemCallback<Contributor>() {
