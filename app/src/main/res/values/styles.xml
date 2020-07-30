@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CircularProgressStyle" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/circular_progress</item>
+        <item name="android:indeterminateDuration">1000</item>
+    </style>
+
 </resources>
