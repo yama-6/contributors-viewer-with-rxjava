@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.android.example.contributorsviewer.R
 import com.android.example.contributorsviewer.databinding.ContributorListFragmentBinding
 import kotlinx.android.synthetic.main.contributor_list_fragment.view.*
@@ -31,7 +32,20 @@ class ContributorListFragment() : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        observeLiveData()
+
         return binding.root
+    }
+
+    private fun observeLiveData() {
+        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val action =
+                    ContributorListFragmentDirections.actionContributorListToContributorDetail(it)
+                findNavController().navigate(action)
+                viewModel.doneNavigating()
+            }
+        })
     }
 
 }

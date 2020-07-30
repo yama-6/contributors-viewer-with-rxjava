@@ -16,6 +16,10 @@ class ContributorListViewModel : ViewModel() {
     val contributors: LiveData<List<Contributor>?>
         get() = _contributors
 
+    private val _navigateToDetail: MutableLiveData<String?> = MutableLiveData()
+    val navigateToDetail: LiveData<String?>
+        get() = _navigateToDetail
+
     init {
         refreshContributors()
     }
@@ -29,7 +33,15 @@ class ContributorListViewModel : ViewModel() {
     }
 
     val onClickContributor = { contributor: Contributor ->
-        //TODO implement
+        navigateToDetail(contributor.userPageUrl)
+    }
+
+    fun navigateToDetail(userPageUrl: String) {
+        _navigateToDetail.value = userPageUrl
+    }
+
+    fun doneNavigating() {
+        _navigateToDetail.value = null
     }
 
     override fun onCleared() {

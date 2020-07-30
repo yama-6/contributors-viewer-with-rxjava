@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/contributor_list">
+    app:startDestination="@id/contributor_list"
+    tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@+id/contributor_list"
-        android:name="com.android.example.contributorsviewer.contributorlist.ContributorListFragment"
-        android:label="@string/empty">
+        android:name="com.android.example.contributorsviewer.contributorlist.ContributorListFragment">
+        <action
+            android:id="@+id/action_contributor_list_to_contributor_detail"
+            app:destination="@id/contributor_detail" />
     </fragment>
 
+    <fragment
+        android:id="@+id/contributor_detail"
+        android:name="com.android.example.contributorsviewer.contributordetail.ContributorDetailFragment">
+        <argument
+            android:name="userPageUrl"
+            app:argType="string" />
+    </fragment>
 </navigation>
