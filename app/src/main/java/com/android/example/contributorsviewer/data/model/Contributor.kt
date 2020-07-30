@@ -4,6 +4,6 @@ data class Contributor(
     val id: Long,
     val userName: String,
     val avatarUrl: String,
-    val htmlUrl: String,
+    val userPageUrl: String,
     val reposUrl: String
 )

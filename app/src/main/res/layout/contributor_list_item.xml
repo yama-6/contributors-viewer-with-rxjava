@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="contributor"
             type="com.android.example.contributorsviewer.data.model.Contributor" />

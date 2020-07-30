@@ -7,7 +7,7 @@ data class ContributorDto(
     val id: Long,
     @Json(name = "login") val userName: String,
     @Json(name = "avatar_url") val avatarUrl: String,
-    @Json(name = "html_url") val htmlUrl: String,
+    @Json(name = "html_url") val userPageUrl: String,
     @Json(name = "repos_url") val reposUrl: String
 ) {
     fun toContributor(): Contributor {
@@ -15,7 +15,7 @@ data class ContributorDto(
             id = id,
             userName = userName,
             avatarUrl = avatarUrl,
-            htmlUrl = htmlUrl,
+            userPageUrl = userPageUrl,
             reposUrl = reposUrl
         )
     }
