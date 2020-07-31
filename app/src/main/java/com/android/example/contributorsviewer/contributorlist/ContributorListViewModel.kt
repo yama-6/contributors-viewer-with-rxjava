@@ -7,9 +7,14 @@ import com.android.example.contributorsviewer.data.api.GithubApi
 import com.android.example.contributorsviewer.data.api.dto.toContributorList
 import com.android.example.contributorsviewer.data.model.Contributor
 import kotlinx.coroutines.*
+import retrofit2.HttpException
+import timber.log.Timber
+import java.io.IOException
 import java.lang.Exception
+import java.net.UnknownHostException
 
-enum class LoadingStatus { Initialized, Loading, Done }
+enum class LoadingStatus { Initialized, Loading, Done, NetworkError,
+    IOError, NoNetworkConnection }
 
 class ContributorListViewModel : ViewModel() {
     private val viewModelJob = Job()
@@ -38,13 +43,17 @@ class ContributorListViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _contributors.value = withContext(Dispatchers.IO) {
-                    GithubApi.getContributors().await().toContributorList()
+                    GithubApi.getContributors().toContributorList()
                 }
                 _loadingStatus.value = LoadingStatus.Done
             }
             catch (e: Exception) {
-                //TODO handle exception
-                throw e
+                _loadingStatus.value = when (e) {
+                    is HttpException -> LoadingStatus.NetworkError
+                    is UnknownHostException -> LoadingStatus.NoNetworkConnection
+                    is IOException -> LoadingStatus.IOError
+                    else -> throw e
+                }
             }
         }
     }

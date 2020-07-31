@@ -11,7 +11,7 @@ import retrofit2.http.GET
 
 interface GithubApiService {
     @GET("contributors")
-    fun getContributors(): Deferred<List<ContributorDto>>
+    suspend fun getContributors(): List<ContributorDto>
 }
 
 object GithubApi {
@@ -31,5 +31,5 @@ object GithubApi {
         retrofit.create(GithubApiService::class.java)
     }
 
-    fun getContributors(): Deferred<List<ContributorDto>> = retrofitService.getContributors()
+    suspend fun getContributors(): List<ContributorDto> = retrofitService.getContributors()
 }

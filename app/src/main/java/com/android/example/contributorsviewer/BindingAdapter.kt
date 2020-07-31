@@ -38,6 +38,8 @@ fun ImageView.bind(imgUrl: String) {
 fun ProgressBar.bind(status: LoadingStatus) {
     visibility = when (status) {
         LoadingStatus.Loading -> View.VISIBLE
+
+        // Other cases (NetworkError, NoNetworkConnection etc) are also handled by Observer in ContributorListFragment.
         else -> View.GONE
     }
 }
