@@ -15,7 +15,7 @@ interface GithubApiService {
 }
 
 object GithubApi {
-    private const val BASE_URL = "https://api.github.com/repositories/90792131/"
+    private const val BASE_URL = "https://api.github.com/repos/android/architecture-components-samples/"
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
