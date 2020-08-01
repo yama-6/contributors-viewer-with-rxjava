@@ -43,7 +43,7 @@ class ContributorListFragment() : Fragment() {
         })
 
         viewModel.loadingStatus.observe(viewLifecycleOwner, Observer {
-            it?.let {
+            it.let {
                 val toastMessageResId: Int = when (it) {
                     LoadingStatus.NetworkError -> R.string.network_error
                     LoadingStatus.NoNetworkConnection -> R.string.no_network_connection

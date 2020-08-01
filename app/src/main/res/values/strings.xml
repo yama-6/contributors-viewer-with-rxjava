@@ -4,4 +4,5 @@
     <string name="network_error">通信エラーが起きました</string>
     <string name="no_network_connection">インターネットに接続されていません</string>
     <string name="io_error">入出力エラーが起きました</string>
+    <string name="get_more">さらに取得</string>
 </resources>
