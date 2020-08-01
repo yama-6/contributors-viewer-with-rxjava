@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.android.example.contributorsviewer.R
 import com.android.example.contributorsviewer.databinding.ContributorListFragmentBinding
 
@@ -26,6 +27,19 @@ class ContributorListFragment() : Fragment() {
             ContributorListFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        val contributorClickListener = ContributorClickListener { viewModel.onClickContributor(it) }
+        val getMoreClickListener = GetMoreClickListener { viewModel.onClickGetMore(it) }
+        binding.recyclerView.adapter =
+            ContributorAdapter(contributorClickListener, getMoreClickListener)
+
+        (binding.recyclerView.adapter as ContributorAdapter).registerAdapterDataObserver(
+            object : RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    binding.recyclerView.scrollToPosition(positionStart)
+                }
+            }
+        )
 
         observeLiveData()
 

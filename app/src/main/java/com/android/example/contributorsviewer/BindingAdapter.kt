@@ -11,18 +11,8 @@ import com.android.example.contributorsviewer.contributorlist.*
 import com.android.example.contributorsviewer.data.model.Contributor
 import com.bumptech.glide.Glide
 
-@BindingAdapter(
-    "contributors", "nextPage", "onClickContributorCallback", "onClickGetMoreCallback"
-)
-fun RecyclerView.bind(
-    contributors: List<Contributor>,
-    nextPage: Int?,
-    contributorCallback: (contributor: Contributor) -> Unit,
-    getMoreCallback: (nextPage: Int) -> Unit
-) {
-    val contributorClickListener = ContributorClickListener(contributorCallback)
-    val getMoreClickListener = GetMoreClickListener(getMoreCallback)
-    adapter = ContributorAdapter(contributorClickListener, getMoreClickListener)
+@BindingAdapter("contributors", "nextPage")
+fun RecyclerView.bind(contributors: List<Contributor>, nextPage: Int?) {
     (adapter as ContributorAdapter).submitList(contributors, nextPage)
 }
 

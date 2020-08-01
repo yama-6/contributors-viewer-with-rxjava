@@ -14,12 +14,10 @@
         android:layout_width="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contributor_list"
+            android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/spacing_small"
-            app:onClickContributorCallback="@{viewModel.onClickContributor}"
-            app:onClickGetMoreCallback="@{viewModel.onClickGetMore}"
             app:contributors="@{viewModel.contributors}"
             app:nextPage="@{viewModel.nextPage}"
             app:status="@{viewModel.loadingStatus}"
