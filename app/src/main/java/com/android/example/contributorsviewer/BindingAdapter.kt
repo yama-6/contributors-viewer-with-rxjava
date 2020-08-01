@@ -7,10 +7,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.contributorsviewer.contributorlist.ContributorAdapter
-import com.android.example.contributorsviewer.contributorlist.ContributorClickListener
-import com.android.example.contributorsviewer.contributorlist.GetMoreClickListener
-import com.android.example.contributorsviewer.contributorlist.LoadingStatus
+import com.android.example.contributorsviewer.contributorlist.*
 import com.android.example.contributorsviewer.data.model.Contributor
 import com.bumptech.glide.Glide
 
@@ -27,6 +24,14 @@ fun RecyclerView.bind(
     val getMoreClickListener = GetMoreClickListener(getMoreCallback)
     adapter = ContributorAdapter(contributorClickListener, getMoreClickListener)
     (adapter as ContributorAdapter).submitList(contributors, nextPage)
+}
+
+@BindingAdapter("status")
+fun RecyclerView.bindStatus(status: LoadingStatus) {
+    alpha = when (status) {
+        LoadingStatus.Loading -> 0.2F
+        else -> 1.0F
+    }
 }
 
 @BindingAdapter("imgUrl")

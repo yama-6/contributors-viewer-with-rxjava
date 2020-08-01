@@ -22,6 +22,7 @@
             app:onClickGetMoreCallback="@{viewModel.onClickGetMore}"
             app:contributors="@{viewModel.contributors}"
             app:nextPage="@{viewModel.nextPage}"
+            app:status="@{viewModel.loadingStatus}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

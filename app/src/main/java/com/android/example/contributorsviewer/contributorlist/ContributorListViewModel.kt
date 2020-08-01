@@ -109,11 +109,15 @@ class ContributorListViewModel : ViewModel() {
     }
 
     val onClickContributor = { contributor: Contributor ->
-        navigateToDetail(contributor.userPageUrl)
+        if (_loadingStatus.value != LoadingStatus.Loading) {
+            navigateToDetail(contributor.userPageUrl)
+        }
     }
 
     val onClickGetMore = { nextPage: Int ->
-        getContributorsFromApi(nextPage)
+        if (_loadingStatus.value != LoadingStatus.Loading) {
+            getContributorsFromApi(nextPage)
+        }
     }
 
     private fun navigateToDetail(userPageUrl: String) {
