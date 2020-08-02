@@ -5,18 +5,18 @@ import com.squareup.moshi.Json
 
 data class ContributorDto(
     val id: Long,
-    @Json(name = "login") val userName: String,
+    @Json(name = "login") val loginName: String,
     @Json(name = "avatar_url") val avatarUrl: String,
-    @Json(name = "html_url") val userPageUrl: String,
-    @Json(name = "repos_url") val reposUrl: String
+    @Json(name = "url") val userDataUrl: String,
+    @Json(name = "html_url") val userPageUrl: String
 ) {
     fun toContributor(): Contributor {
         return Contributor(
             id = id,
-            userName = userName,
+            userName = loginName,
             avatarUrl = avatarUrl,
-            userPageUrl = userPageUrl,
-            reposUrl = reposUrl
+            userDataUrl = userDataUrl,
+            userPageUrl = userPageUrl
         )
     }
 }
