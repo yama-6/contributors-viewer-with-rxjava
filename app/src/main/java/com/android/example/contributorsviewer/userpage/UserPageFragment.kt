@@ -1,4 +1,4 @@
-package com.android.example.contributorsviewer.contributordetail
+package com.android.example.contributorsviewer.userpage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.android.example.contributorsviewer.MainActivity
-import com.android.example.contributorsviewer.databinding.ContributorDetailFragmentBinding
+import com.android.example.contributorsviewer.databinding.UserPageFragmentBinding
 
-class ContributorDetailFragment() : Fragment() {
+class UserPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding =
-            ContributorDetailFragmentBinding.inflate(inflater, container, false)
+            UserPageFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val userPageUrl = ContributorDetailFragmentArgs
+        val userPageUrl = UserPageFragmentArgs
             .fromBundle(requireArguments()).userPageUrl
 
         binding.webview.apply {

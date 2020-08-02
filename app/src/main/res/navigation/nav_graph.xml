@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/contributor_detail"
-        android:name="com.android.example.contributorsviewer.contributordetail.ContributorDetailFragment">
+        android:name="com.android.example.contributorsviewer.userpage.UserPageFragment">
         <argument
             android:name="userPageUrl"
             app:argType="string" />
