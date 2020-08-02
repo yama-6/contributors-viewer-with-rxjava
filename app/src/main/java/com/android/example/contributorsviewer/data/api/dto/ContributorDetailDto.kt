@@ -16,7 +16,6 @@ data class ContributorDetailDto(
             id = contributor.id,
             userName = contributor.loginName,
             avatarUrl = contributor.avatarUrl,
-            userSourceUrl = contributor.userDataUrl,
             userPageUrl = contributor.userPageUrl,
             name = name,
             followers = followers,
