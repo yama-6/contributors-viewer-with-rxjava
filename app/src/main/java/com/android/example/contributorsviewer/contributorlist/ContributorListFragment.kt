@@ -27,23 +27,26 @@ class ContributorListFragment() : Fragment() {
             ContributorListFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
-        val contributorClickListener = ContributorClickListener { viewModel.onClickContributor(it) }
-        val getMoreClickListener = GetMoreClickListener { viewModel.onClickGetMore(it) }
-        binding.recyclerView.adapter =
-            ContributorAdapter(contributorClickListener, getMoreClickListener)
-
-        (binding.recyclerView.adapter as ContributorAdapter).registerAdapterDataObserver(
-            object : RecyclerView.AdapterDataObserver() {
-                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                    binding.recyclerView.scrollToPosition(positionStart)
-                }
-            }
-        )
+        binding.recyclerView.setContributorAdapter()
 
         observeLiveData()
 
         return binding.root
+    }
+
+    private fun RecyclerView.setContributorAdapter() {
+        val contributorClickListener = ContributorClickListener { viewModel.onClickContributor(it) }
+        val getMoreClickListener = GetMoreClickListener { viewModel.onClickGetMore(it) }
+        adapter =
+            ContributorAdapter(contributorClickListener, getMoreClickListener)
+
+        (adapter as ContributorAdapter).registerAdapterDataObserver(
+            object : RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    scrollToPosition(positionStart)
+                }
+            }
+        )
     }
 
     private fun observeLiveData() {
