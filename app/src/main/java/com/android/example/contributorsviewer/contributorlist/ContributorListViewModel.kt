@@ -84,11 +84,14 @@ class ContributorListViewModel : ViewModel() {
         val splitted = link.split(',')
         splitted.forEach {
             val splitted_ = it.split(';')
+            if (splitted_.size != 2)
+                throw IllegalStateException()
             val last = splitted_.last()
 
             val regex = Regex("^ rel=\".*\"")
             val matched = regex.containsMatchIn(last)
-            if (!matched) throw IllegalStateException()
+            if (!matched)
+                throw IllegalStateException()
 
             val relValue = last.substring(" rel=\"".length until last.length - 1)
             if (relValue == "next") {
