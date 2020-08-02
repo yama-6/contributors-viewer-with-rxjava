@@ -4,5 +4,6 @@
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_large">32dp</dimen>
     <dimen name="font_size_normal">16sp</dimen>
+    <dimen name="font_size_large">24sp</dimen>
     <dimen name="translation_z_top_of_view">2dp</dimen>
 </resources>

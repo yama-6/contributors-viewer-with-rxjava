@@ -6,10 +6,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.contributorsviewer.contributorlist.*
 import com.android.example.contributorsviewer.data.model.Contributor
+import com.android.example.contributorsviewer.data.model.ContributorDetail
 import com.bumptech.glide.Glide
 
 @BindingAdapter("contributors", "nextPage")
@@ -26,11 +28,13 @@ fun RecyclerView.bindStatus(status: LoadingStatus) {
 }
 
 @BindingAdapter("imgUrl")
-fun ImageView.bind(imgUrl: String) {
-    val imgUri = Uri.parse(imgUrl)
-    Glide.with(context)
-        .load(imgUri)
-        .into(this)
+fun ImageView.bind(imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = Uri.parse(imgUrl)
+        Glide.with(context)
+            .load(imgUri)
+            .into(this)
+    }
 }
 
 @BindingAdapter("status")
@@ -53,5 +57,26 @@ fun Button.bind_(status: LoadingStatus, contributors: List<Contributor>) {
     visibility = when (status.isError() && contributors.isEmpty()) {
         true -> View.VISIBLE
         false -> View.GONE
+    }
+}
+
+@BindingAdapter("contributorDetail_followers")
+fun TextView.bindFollowers(contributorDetail: ContributorDetail?) {
+    contributorDetail?.let {
+        text = contributorDetail.followers.toString()
+    }
+}
+
+@BindingAdapter("contributorDetail_following")
+fun TextView.bindFollowing(contributorDetail: ContributorDetail?) {
+    contributorDetail?.let {
+        text = contributorDetail.following.toString()
+    }
+}
+
+@BindingAdapter("contributorDetail_repos")
+fun TextView.bindRepos(contributorDetail: ContributorDetail?) {
+    contributorDetail?.let {
+        text = contributorDetail.publicRepos.toString()
     }
 }
