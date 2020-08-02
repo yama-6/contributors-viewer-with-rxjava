@@ -33,8 +33,8 @@ class ContributorListViewModel : ViewModel() {
     val loadingStatus: LiveData<LoadingStatus>
         get() = _loadingStatus
 
-    private val _navigateToDetail: MutableLiveData<String?> = MutableLiveData()
-    val navigateToDetail: LiveData<String?>
+    private val _navigateToDetail: MutableLiveData<Contributor?> = MutableLiveData()
+    val navigateToDetail: LiveData<Contributor?>
         get() = _navigateToDetail
 
     init {
@@ -110,7 +110,7 @@ class ContributorListViewModel : ViewModel() {
 
     val onClickContributor = { contributor: Contributor ->
         if (_loadingStatus.value != LoadingStatus.Loading) {
-            navigateToDetail(contributor.userPageUrl)
+            navigateToDetail(contributor)
         }
     }
 
@@ -124,8 +124,8 @@ class ContributorListViewModel : ViewModel() {
         getContributorsFromApi()
     }
 
-    private fun navigateToDetail(userPageUrl: String) {
-        _navigateToDetail.value = userPageUrl
+    private fun navigateToDetail(contributor: Contributor) {
+        _navigateToDetail.value = contributor
     }
 
     fun doneNavigating() {
