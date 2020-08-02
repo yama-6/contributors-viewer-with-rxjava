@@ -23,10 +23,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (webView == null)
-            return super.onKeyDown(keyCode, event)
-        if (keyCode != KeyEvent.KEYCODE_BACK || !webView!!.canGoBack())
-            return super.onKeyDown(keyCode, event)
+        when (true) {
+            webView == null,
+            keyCode != KeyEvent.KEYCODE_BACK,
+            !webView!!.canGoBack()
+                -> return super.onKeyDown(keyCode, event)
+        }
 
         webView!!.goBack()
         return true
