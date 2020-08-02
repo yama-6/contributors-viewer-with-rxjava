@@ -16,9 +16,6 @@ import java.lang.Exception
 import java.net.UnknownHostException
 import kotlin.IllegalStateException
 
-enum class LoadingStatus { Initialized, Loading, Done, NetworkError,
-    IOError, NoNetworkConnection }
-
 class ContributorListViewModel : ViewModel() {
     private val viewModelJob = Job()
     private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -118,6 +115,10 @@ class ContributorListViewModel : ViewModel() {
         if (_loadingStatus.value != LoadingStatus.Loading) {
             getContributorsFromApi(nextPage)
         }
+    }
+
+    fun onReload() {
+        getContributorsFromApi()
     }
 
     private fun navigateToDetail(userPageUrl: String) {

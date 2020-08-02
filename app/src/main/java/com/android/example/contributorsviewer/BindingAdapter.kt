@@ -1,6 +1,7 @@
 package com.android.example.contributorsviewer
 
 import android.net.Uri
+import android.opengl.Visibility
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -45,4 +46,12 @@ fun ProgressBar.bind(status: LoadingStatus) {
 @BindingAdapter("nextPage")
 fun Button.bind(nextPage: Int?) {
     isEnabled = nextPage != null
+}
+
+@BindingAdapter("status", "contributors")
+fun Button.bind_(status: LoadingStatus, contributors: List<Contributor>) {
+    visibility = when (status.isError() && contributors.isEmpty()) {
+        true -> View.VISIBLE
+        false -> View.GONE
+    }
 }

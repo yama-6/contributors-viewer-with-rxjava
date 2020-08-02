@@ -33,10 +33,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:translationZ="@dimen/translation_z_top_of_view"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:status="@{viewModel.loadingStatus}" />
+
+        <Button
+            android:id="@+id/reload_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reload"
+            android:visibility="gone"
+            app:status="@{viewModel.loadingStatus}"
+            app:contributors="@{viewModel.contributors}"
+            android:onClick="@{() -> viewModel.onReload()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
