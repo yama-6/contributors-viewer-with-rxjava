@@ -2,7 +2,7 @@ package com.android.example.contributorsviewer.data.model
 
 data class ContributorDetail(
     val id: Long,
-    val userName: String,
+    val loginName: String,
     val avatarUrl: String,
     val userPageUrl: String,
     val name: String,
