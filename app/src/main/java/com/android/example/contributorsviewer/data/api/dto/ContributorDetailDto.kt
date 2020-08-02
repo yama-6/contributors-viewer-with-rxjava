@@ -5,7 +5,7 @@ import com.android.example.contributorsviewer.data.model.ContributorDetail
 import com.squareup.moshi.Json
 
 data class ContributorDetailDto(
-    val name: String,
+    val name: String?,
     val followers: Int,
     val following: Int,
     @Json(name = "public_repos") val publicRepos: Int,

@@ -5,7 +5,7 @@ data class ContributorDetail(
     val loginName: String,
     val avatarUrl: String,
     val userPageUrl: String,
-    val name: String,
+    val name: String?,
     val followers: Int,
     val following: Int,
     val publicRepos: Int,
