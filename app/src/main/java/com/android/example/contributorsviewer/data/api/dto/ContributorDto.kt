@@ -13,7 +13,7 @@ data class ContributorDto(
     fun toContributor(): Contributor {
         return Contributor(
             id = id,
-            userName = loginName,
+            loginName = loginName,
             avatarUrl = avatarUrl,
             userDataUrl = userDataUrl,
             userPageUrl = userPageUrl

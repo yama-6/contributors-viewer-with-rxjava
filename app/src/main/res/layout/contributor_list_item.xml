@@ -49,7 +49,7 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="@{contributor.userName}"
+            android:text="@{contributor.loginName}"
             android:textSize="@dimen/font_size_normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/avatar_icon_container"

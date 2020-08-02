@@ -14,7 +14,7 @@ data class ContributorDetailDto(
     fun toContributorDetail(contributor: Contributor): ContributorDetail {
         return ContributorDetail(
             id = contributor.id,
-            userName = contributor.userName,
+            userName = contributor.loginName,
             avatarUrl = contributor.avatarUrl,
             userSourceUrl = contributor.userDataUrl,
             userPageUrl = contributor.userPageUrl,
