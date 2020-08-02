@@ -43,7 +43,9 @@ class ContributorListFragment() : Fragment() {
         (adapter as ContributorAdapter).registerAdapterDataObserver(
             object : RecyclerView.AdapterDataObserver() {
                 override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                    scrollToPosition(positionStart)
+                    if (positionStart != 0) {
+                        scrollToPosition(positionStart)
+                    }
                 }
             }
         )
