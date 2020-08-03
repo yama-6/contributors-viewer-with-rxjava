@@ -4,22 +4,20 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.example.contributorsviewer.LoadingStatus
+import com.android.example.contributorsviewer.LoadingStatusViewModel
 import com.android.example.contributorsviewer.data.api.GithubApi
 import com.android.example.contributorsviewer.data.api.dto.toContributorList
 import com.android.example.contributorsviewer.data.model.Contributor
 import kotlinx.coroutines.*
 import okhttp3.Headers
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 import java.lang.Exception
 import java.net.UnknownHostException
 import kotlin.IllegalStateException
 
-class ContributorListViewModel : ViewModel() {
-    private val viewModelJob = Job()
-    private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
+class ContributorListViewModel : LoadingStatusViewModel() {
     private val _contributors: MutableLiveData<List<Contributor>> = MutableLiveData(emptyList())
     val contributors: LiveData<List<Contributor>>
         get() = _contributors
@@ -27,11 +25,6 @@ class ContributorListViewModel : ViewModel() {
     private val _nextPage: MutableLiveData<Int?> = MutableLiveData()
     val nextPage: LiveData<Int?>
         get() = _nextPage
-
-    private val _loadingStatus: MutableLiveData<LoadingStatus> =
-        MutableLiveData(LoadingStatus.Initialized)
-    val loadingStatus: LiveData<LoadingStatus>
-        get() = _loadingStatus
 
     private val _navigateToDetail: MutableLiveData<Contributor?> = MutableLiveData()
     val navigateToDetail: LiveData<Contributor?>
@@ -130,10 +123,6 @@ class ContributorListViewModel : ViewModel() {
 
     fun doneNavigating() {
         _navigateToDetail.value = null
-    }
-
-    override fun onCleared() {
-        viewModelJob.cancel()
     }
 
 }

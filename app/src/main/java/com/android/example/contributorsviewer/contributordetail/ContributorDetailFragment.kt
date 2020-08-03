@@ -10,8 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.android.example.contributorsviewer.R
-import com.android.example.contributorsviewer.contributorlist.ContributorListFragmentDirections
-import com.android.example.contributorsviewer.contributorlist.LoadingStatus
+import com.android.example.contributorsviewer.LoadingStatus
 import com.android.example.contributorsviewer.databinding.ContributorDetailFragmentBinding
 
 class ContributorDetailFragment : Fragment() {
@@ -57,8 +56,8 @@ class ContributorDetailFragment : Fragment() {
                     else -> return@let
                 }
 
-                Toast.makeText(context, getString(toastMessageResId), Toast.LENGTH_LONG).show()
                 findNavController().popBackStack()
+                Toast.makeText(context, getString(toastMessageResId), Toast.LENGTH_LONG).show()
             }
         })
     }

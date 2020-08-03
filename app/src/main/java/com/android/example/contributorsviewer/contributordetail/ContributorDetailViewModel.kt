@@ -3,7 +3,8 @@ package com.android.example.contributorsviewer.contributordetail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.example.contributorsviewer.contributorlist.LoadingStatus
+import com.android.example.contributorsviewer.LoadingStatus
+import com.android.example.contributorsviewer.LoadingStatusViewModel
 import com.android.example.contributorsviewer.data.api.GithubApi
 import com.android.example.contributorsviewer.data.model.Contributor
 import com.android.example.contributorsviewer.data.model.ContributorDetail
@@ -12,18 +13,10 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.UnknownHostException
 
-class ContributorDetailViewModel(contributor: Contributor) : ViewModel() {
-    private val viewModelJob = Job()
-    private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
+class ContributorDetailViewModel(contributor: Contributor) : LoadingStatusViewModel() {
     private val _contributorDetail: MutableLiveData<ContributorDetail> = MutableLiveData()
     val contributorDetail: LiveData<ContributorDetail>
         get() = _contributorDetail
-
-    private val _loadingStatus: MutableLiveData<LoadingStatus> =
-        MutableLiveData(LoadingStatus.Initialized)
-    val loadingStatus: LiveData<LoadingStatus>
-        get() = _loadingStatus
 
     private val _navigateToUserPage: MutableLiveData<String?> = MutableLiveData()
     val navigateToUserPage: LiveData<String?>
@@ -65,10 +58,6 @@ class ContributorDetailViewModel(contributor: Contributor) : ViewModel() {
 
     fun doneNavigating() {
         _navigateToUserPage.value = null
-    }
-
-    override fun onCleared() {
-        viewModelJob.cancel()
     }
 
 }

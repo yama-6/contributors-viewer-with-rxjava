@@ -1,4 +1,4 @@
-package com.android.example.contributorsviewer.contributorlist
+package com.android.example.contributorsviewer
 
 enum class LoadingStatus {
     Initialized,

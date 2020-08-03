@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.android.example.contributorsviewer.LoadingStatus
 import com.android.example.contributorsviewer.R
 import com.android.example.contributorsviewer.databinding.ContributorListFragmentBinding
 

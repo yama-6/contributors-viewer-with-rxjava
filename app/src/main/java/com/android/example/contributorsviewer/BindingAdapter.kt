@@ -1,7 +1,6 @@
 package com.android.example.contributorsviewer
 
 import android.net.Uri
-import android.opengl.Visibility
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -51,7 +50,7 @@ fun ProgressBar.bind(status: LoadingStatus) {
     visibility = when (status) {
         LoadingStatus.Loading -> View.VISIBLE
 
-        // Other cases (NetworkError, NoNetworkConnection etc) are also handled by Observer in ContributorListFragment.
+        // Other cases (NetworkError, NoNetworkConnection etc) are also handled by Observer in Fragment.
         else -> View.GONE
     }
 }
