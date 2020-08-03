@@ -89,7 +89,10 @@ class ContributorListViewModel : LoadingStatusViewModel() {
             val relValue = last.substring(" rel=\"".length until last.length - 1)
             if (relValue == "next") {
                 val first = splitted_.first()
-                val urlStr = first.substring(1 until first.length - 1)
+                val urlPrefixIndex = first.indexOf('<')
+                val urlSuffixIndex = first.indexOf('>')
+                val urlStr =
+                    first.substring(urlPrefixIndex + 1 until urlSuffixIndex)
                 val uri = Uri.parse(urlStr)
                 val page = uri.getQueryParameter("page")?.toInt()
                     ?: throw IllegalStateException()
