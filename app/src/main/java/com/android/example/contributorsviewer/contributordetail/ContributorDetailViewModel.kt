@@ -25,6 +25,10 @@ class ContributorDetailViewModel(contributor: Contributor) : ViewModel() {
     val loadingStatus: LiveData<LoadingStatus>
         get() = _loadingStatus
 
+    private val _navigateToUserPage: MutableLiveData<String?> = MutableLiveData()
+    val navigateToUserPage: LiveData<String?>
+        get() = _navigateToUserPage
+
     init {
         getContributorDetailFromApi(contributor)
     }
@@ -49,6 +53,18 @@ class ContributorDetailViewModel(contributor: Contributor) : ViewModel() {
                 }
             }
         }
+    }
+
+    fun onClickGoToGithub() {
+        navigateToUserPage(contributorDetail.value!!.userPageUrl)
+    }
+
+    fun navigateToUserPage(userPageUrl: String) {
+        _navigateToUserPage.value = userPageUrl
+    }
+
+    fun doneNavigating() {
+        _navigateToUserPage.value = null
     }
 
     override fun onCleared() {

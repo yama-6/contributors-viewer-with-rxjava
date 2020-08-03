@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.android.example.contributorsviewer.MainActivity
 import com.android.example.contributorsviewer.databinding.UserPageFragmentBinding
 
+// User page means Github user page of the contributor.
 class UserPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

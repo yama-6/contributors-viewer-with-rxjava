@@ -20,6 +20,9 @@
         <argument
             android:name="contributor"
             app:argType="com.android.example.contributorsviewer.data.model.Contributor" />
+        <action
+            android:id="@+id/action_contributor_detail_to_user_page"
+            app:destination="@id/user_page" />
     </fragment>
 
     <fragment

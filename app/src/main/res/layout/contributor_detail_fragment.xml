@@ -3,177 +3,196 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-<data>
+    <data>
         <variable
             name="viewModel"
             type="com.android.example.contributorsviewer.contributordetail.ContributorDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:paddingStart="@dimen/spacing_large"
-        android:paddingTop="@dimen/spacing_normal"
-        android:paddingEnd="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_normal">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/avatar_icon_container"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:cardCornerRadius="35dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.1">
-
-            <ImageView
-                android:id="@+id/avatar_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:imgUrl="@{viewModel.contributorDetail.avatarUrl}" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/name_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{viewModel.contributorDetail.name}"
-            android:textSize="@dimen/font_size_large"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/login_name_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/avatar_icon_container"
-            app:layout_constraintTop_toTopOf="@+id/avatar_icon_container"
-            tools:text="name name" />
-
-        <TextView
-            android:id="@+id/login_name_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{viewModel.contributorDetail.loginName}"
-            android:textSize="@dimen/font_size_normal"
-            app:layout_constraintBottom_toBottomOf="@+id/avatar_icon_container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/avatar_icon_container"
-            app:layout_constraintTop_toBottomOf="@+id/name_text"
-            tools:text="login name login name" />
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dataViewGroup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_normal"
-            android:background="@color/light_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar_icon_container"
-            app:layout_constraintVertical_bias="0.1">
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingTop="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_large"
+            android:paddingBottom="@dimen/spacing_normal"
+            app:status="@{viewModel.loadingStatus}">
 
-            <TextView
-                android:id="@+id/followers_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/follower_count"
-                android:textSize="@dimen/font_size_normal"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/avatar_icon_container"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:cardCornerRadius="35dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.1">
+
+                <ImageView
+                    android:id="@+id/avatar_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:imgUrl="@{viewModel.contributorDetail.avatarUrl}" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/followers"
-                android:layout_width="wrap_content"
+                android:id="@+id/name_text"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="@dimen/font_size_normal"
-                app:contributorDetail_followers='@{viewModel.contributorDetail}'
-                app:layout_constraintBottom_toBottomOf="@+id/followers_label"
+                android:text="@{viewModel.contributorDetail.name}"
+                android:textSize="@dimen/font_size_large"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/login_name_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/followers_label"
-                app:layout_constraintTop_toTopOf="@+id/followers_label"
-                tools:text="500" />
+                app:layout_constraintStart_toEndOf="@+id/avatar_icon_container"
+                app:layout_constraintTop_toTopOf="@+id/avatar_icon_container"
+                tools:text="name name" />
 
             <TextView
-                android:id="@+id/following_label"
-                android:layout_width="wrap_content"
+                android:id="@+id/login_name_text"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:text="@string/following_count"
-                android:textSize="@dimen/font_size_normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/dataViewGroup"
-                app:layout_constraintStart_toStartOf="@+id/dataViewGroup"
-                app:layout_constraintTop_toBottomOf="@+id/followers_label" />
-
-            <TextView
-                android:id="@+id/following"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="@{viewModel.contributorDetail.loginName}"
                 android:textSize="@dimen/font_size_normal"
-                app:contributorDetail_following='@{viewModel.contributorDetail}'
-                app:layout_constraintBottom_toBottomOf="@+id/following_label"
+                app:layout_constraintBottom_toBottomOf="@+id/avatar_icon_container"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/following_label"
-                app:layout_constraintTop_toTopOf="@+id/following_label"
-                tools:text="500" />
+                app:layout_constraintStart_toEndOf="@+id/avatar_icon_container"
+                app:layout_constraintTop_toBottomOf="@+id/name_text"
+                tools:text="login name login name" />
 
-            <TextView
-                android:id="@+id/repos_label"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dataViewGroup"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:text="@string/repo_count"
-                android:textSize="@dimen/font_size_normal"
+                android:padding="@dimen/spacing_normal"
+                android:background="@color/light_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/following_label" />
+                app:layout_constraintTop_toBottomOf="@+id/avatar_icon_container"
+                app:layout_constraintVertical_bias="0.1">
 
-            <TextView
-                android:id="@+id/repos"
+                <TextView
+                    android:id="@+id/followers_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/follower_count"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/followers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal"
+                    app:contributorDetail_followers='@{viewModel.contributorDetail}'
+                    app:layout_constraintBottom_toBottomOf="@+id/followers_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/followers_label"
+                    app:layout_constraintTop_toTopOf="@+id/followers_label"
+                    tools:text="500" />
+
+                <TextView
+                    android:id="@+id/following_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@string/following_count"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/dataViewGroup"
+                    app:layout_constraintStart_toStartOf="@+id/dataViewGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/followers_label" />
+
+                <TextView
+                    android:id="@+id/following"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal"
+                    app:contributorDetail_following='@{viewModel.contributorDetail}'
+                    app:layout_constraintBottom_toBottomOf="@+id/following_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/following_label"
+                    app:layout_constraintTop_toTopOf="@+id/following_label"
+                    tools:text="500" />
+
+                <TextView
+                    android:id="@+id/repos_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@string/repo_count"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/following_label" />
+
+                <TextView
+                    android:id="@+id/repos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal"
+                    app:contributorDetail_repos='@{viewModel.contributorDetail}'
+                    app:layout_constraintBottom_toBottomOf="@+id/repos_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/repos_label"
+                    app:layout_constraintTop_toTopOf="@+id/repos_label"
+                    tools:text="500" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/go_to_github"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textSize="@dimen/font_size_normal"
-                app:contributorDetail_repos='@{viewModel.contributorDetail}'
-                app:layout_constraintBottom_toBottomOf="@+id/repos_label"
+                android:text="@string/go_to_github"
+                android:onClick="@{() -> viewModel.onClickGoToGithub()}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/repos_label"
-                app:layout_constraintTop_toTopOf="@+id/repos_label"
-                tools:text="500" />
-
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dataViewGroup"
+                app:layout_constraintVertical_bias="0.1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/go_to_github"
+        <ProgressBar
+            android:id="@+id/circular_progress"
+            style="@style/CircularProgressStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/go_to_github"
+            android:translationZ="@dimen/translation_z_top_of_view"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dataViewGroup"
-            app:layout_constraintVertical_bias="0.1" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:status="@{viewModel.loadingStatus}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

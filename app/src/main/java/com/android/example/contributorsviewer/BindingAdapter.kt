@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.contributorsviewer.contributorlist.*
@@ -24,6 +25,14 @@ fun RecyclerView.bindStatus(status: LoadingStatus) {
     alpha = when (status) {
         LoadingStatus.Loading -> 0.2F
         else -> 1.0F
+    }
+}
+
+@BindingAdapter("status")
+fun ConstraintLayout.bind(status: LoadingStatus) {
+    visibility = when (status) {
+        LoadingStatus.Done -> View.VISIBLE
+        else -> View.GONE
     }
 }
 
