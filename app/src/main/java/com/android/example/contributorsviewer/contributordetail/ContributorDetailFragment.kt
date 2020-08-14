@@ -45,20 +45,18 @@ class ContributorDetailFragment : Fragment() {
             }
         })
 
-        viewModel.loadingStatus.observe(viewLifecycleOwner, Observer {
-            it.let {
-                val toastMessageResId: Int = when (it) {
-                    LoadingStatus.NetworkError -> R.string.network_error
-                    LoadingStatus.NoNetworkConnection -> R.string.no_network_connection
-                    LoadingStatus.IOError -> R.string.io_error
+        viewModel.loadingStatus.observe(viewLifecycleOwner, Observer { status: LoadingStatus ->
+            val toastMessageResId: Int = when (status) {
+                LoadingStatus.NetworkError -> R.string.network_error
+                LoadingStatus.NoNetworkConnection -> R.string.no_network_connection
+                LoadingStatus.IOError -> R.string.io_error
 
-                    // Loading and Done cases are handled by Progressbar Binding adapter.
-                    else -> return@let
-                }
-
-                findNavController().popBackStack()
-                Toast.makeText(context, getString(toastMessageResId), Toast.LENGTH_LONG).show()
+                // Loading and Done cases are handled by Progressbar Binding adapter.
+                else -> return@Observer
             }
+
+            findNavController().popBackStack()
+            Toast.makeText(context, getString(toastMessageResId), Toast.LENGTH_LONG).show()
         })
     }
 
