@@ -55,10 +55,17 @@ class ContributorListFragment() : Fragment() {
     private fun observeLiveData() {
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
             it?.let {
-                val action =
-                    ContributorListFragmentDirections.actionContributorListToContributorDetail(it)
-                findNavController().navigate(action)
-                viewModel.doneNavigating()
+                synchronized(Observer::class.java) {
+                    if (findNavController().currentDestination!!.id != R.id.contributor_list) {
+                        viewModel.doneNavigating()
+                        return@Observer
+                    }
+
+                    val action = ContributorListFragmentDirections
+                        .actionContributorListToContributorDetail(it)
+                    findNavController().navigate(action)
+                    viewModel.doneNavigating()
+                }
             }
         })
 
