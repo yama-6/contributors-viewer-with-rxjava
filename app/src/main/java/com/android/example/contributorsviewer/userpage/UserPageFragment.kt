@@ -4,13 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.android.example.contributorsviewer.MainActivity
 import com.android.example.contributorsviewer.databinding.UserPageFragmentBinding
 
 // User page means Github user page of the contributor.
 class UserPageFragment : Fragment() {
+    private var webView: WebView? = null
+    val canWebViewGoBack: Boolean
+        get() = webView?.canGoBack() ?: false
+
+    fun goBackOnWebView() {
+        webView!!.goBack()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,18 +30,17 @@ class UserPageFragment : Fragment() {
         val userPageUrl = UserPageFragmentArgs
             .fromBundle(requireArguments()).userPageUrl
 
-        binding.webview.apply {
+        webView = binding.webview.apply {
             loadUrl(userPageUrl)
             webViewClient = WebViewClient()
-            (requireActivity() as MainActivity).webView = this
         }
 
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        (requireActivity() as MainActivity).clearWebView()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        webView = null
     }
 
 }
