@@ -8,10 +8,13 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.navArgs
 import com.android.example.contributorsviewer.databinding.UserPageFragmentBinding
 
 // User page means Github user page of the contributor.
 class UserPageFragment : Fragment() {
+    private val args: UserPageFragmentArgs by navArgs()
+
     private var webView: WebView? = null
         set(value) {
             when (lifecycle.currentState) {
@@ -35,16 +38,13 @@ class UserPageFragment : Fragment() {
             UserPageFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val userPageUrl = UserPageFragmentArgs
-            .fromBundle(requireArguments()).userPageUrl
-
         webView = binding.webview.apply {
             when (savedInstanceState) {
-                null -> loadUrl(userPageUrl)
+                null -> loadUrl(args.userPageUrl)
                 else -> {
                     restoreState(savedInstanceState)
                     when (url) {
-                        null -> loadUrl(userPageUrl)
+                        null -> loadUrl(args.userPageUrl)
                     }
                 }
             }

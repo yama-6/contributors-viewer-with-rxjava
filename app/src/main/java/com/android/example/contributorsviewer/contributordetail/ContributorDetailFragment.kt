@@ -9,17 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.android.example.contributorsviewer.R
 import com.android.example.contributorsviewer.LoadingStatus
 import com.android.example.contributorsviewer.databinding.ContributorDetailFragmentBinding
 
 class ContributorDetailFragment : Fragment() {
     private val viewModel: ContributorDetailViewModel by lazy {
-        val contributor =
-            ContributorDetailFragmentArgs.fromBundle(requireArguments()).contributor
-        ViewModelProvider(this, ContributorDetailViewModelFactory(contributor))
+        ViewModelProvider(this, ContributorDetailViewModelFactory(args.contributor))
             .get(ContributorDetailViewModel::class.java)
     }
+
+    private val args: ContributorDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
