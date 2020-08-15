@@ -61,8 +61,9 @@ class ContributorListFragment() : Fragment() {
                         return@Observer
                     }
 
-                    val action = ContributorListFragmentDirections
-                        .actionContributorListToContributorDetail(it)
+                    val action =
+                        ContributorListFragmentDirections
+                            .actionContributorListToContributorDetail(it)
                     findNavController().navigate(action)
                     viewModel.doneNavigating()
                 }

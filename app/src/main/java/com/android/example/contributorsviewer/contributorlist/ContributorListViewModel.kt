@@ -3,7 +3,7 @@ package com.android.example.contributorsviewer.contributorlist
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.android.example.contributorsviewer.LoadingStatus
 import com.android.example.contributorsviewer.LoadingStatusViewModel
 import com.android.example.contributorsviewer.data.api.GithubApi
