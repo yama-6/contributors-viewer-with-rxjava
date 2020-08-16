@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.android.example.contributorsviewer.databinding.UserPageFragmentBinding
 
@@ -22,13 +24,6 @@ class UserPageFragment : Fragment() {
                 else -> throw IllegalStateException()
             }
         }
-
-    val canWebViewGoBack: Boolean
-        get() = webView?.canGoBack() ?: false
-
-    fun goBackOnWebView() {
-        webView!!.goBack()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +48,22 @@ class UserPageFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (webView!!.canGoBack()) {
+                    webView!!.goBack()
+                }
+                else {
+                    findNavController().popBackStack()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
