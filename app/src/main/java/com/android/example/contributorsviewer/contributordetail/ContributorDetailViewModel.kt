@@ -10,6 +10,7 @@ import com.android.example.contributorsviewer.data.model.Contributor
 import com.android.example.contributorsviewer.data.model.ContributorDetail
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.rxkotlin.addTo
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.UnknownHostException
@@ -28,7 +29,7 @@ class ContributorDetailViewModel(contributor: Contributor) : LoadingStatusViewMo
     }
 
     private fun getContributorDetailFromApi(contributor: Contributor) {
-        val disposable = GithubApi.getContributorDetail(contributor.loginName)
+        GithubApi.getContributorDetail(contributor.loginName)
             .doOnSubscribe { _loadingStatus.value = LoadingStatus.Loading }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<ContributorDetailDto>() {
@@ -44,8 +45,7 @@ class ContributorDetailViewModel(contributor: Contributor) : LoadingStatusViewMo
                         else -> throw e
                     }
                 }
-            })
-        compositeDisposable.add(disposable)
+            }).addTo(compositeDisposable)
     }
 
     fun onClickGoToGithub() {
