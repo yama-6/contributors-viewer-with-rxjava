@@ -2,13 +2,14 @@ package com.android.example.contributorsviewer.contributordetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.android.example.contributorsviewer.LoadingStatus
 import com.android.example.contributorsviewer.LoadingStatusViewModel
 import com.android.example.contributorsviewer.data.api.GithubApi
+import com.android.example.contributorsviewer.data.api.dto.ContributorDetailDto
 import com.android.example.contributorsviewer.data.model.Contributor
 import com.android.example.contributorsviewer.data.model.ContributorDetail
-import kotlinx.coroutines.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.UnknownHostException
@@ -27,25 +28,24 @@ class ContributorDetailViewModel(contributor: Contributor) : LoadingStatusViewMo
     }
 
     private fun getContributorDetailFromApi(contributor: Contributor) {
-        _loadingStatus.value = LoadingStatus.Loading
-        viewModelScope.launch {
-            try {
-                val contributorDetail = withContext(Dispatchers.IO) {
-                    GithubApi.getContributorDetail(contributor.loginName).toContributorDetail(contributor)
+        val disposable = GithubApi.getContributorDetail(contributor.loginName)
+            .doOnSubscribe { _loadingStatus.value = LoadingStatus.Loading }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableSingleObserver<ContributorDetailDto>() {
+                override fun onSuccess(it: ContributorDetailDto) {
+                    _contributorDetail.value = it.toContributorDetail(contributor)
+                    _loadingStatus.value = LoadingStatus.Done
                 }
-
-                _loadingStatus.value = LoadingStatus.Done
-                _contributorDetail.value = contributorDetail
-            }
-            catch (e: Exception) {
-                _loadingStatus.value = when (e) {
-                    is HttpException -> LoadingStatus.NetworkError
-                    is UnknownHostException -> LoadingStatus.NoNetworkConnection
-                    is IOException -> LoadingStatus.IOError
-                    else -> throw e
+                override fun onError(e: Throwable) {
+                    _loadingStatus.value = when (e) {
+                        is HttpException -> LoadingStatus.NetworkError
+                        is UnknownHostException -> LoadingStatus.NoNetworkConnection
+                        is IOException -> LoadingStatus.IOError
+                        else -> throw e
+                    }
                 }
-            }
-        }
+            })
+        compositeDisposable.add(disposable)
     }
 
     fun onClickGoToGithub() {

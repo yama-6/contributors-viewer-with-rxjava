@@ -5,8 +5,11 @@ import com.android.example.contributorsviewer.data.api.dto.ContributorDto
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,9 +22,9 @@ interface GithubApiService {
     ): Response<List<ContributorDto>>
 
     @GET("users/{login_name}")
-    suspend fun getContributorDetail(
+    fun getContributorDetail(
         @Path("login_name") loginName: String
-    ): ContributorDetailDto
+    ): Single<ContributorDetailDto>
 }
 
 object GithubApi {
@@ -34,6 +37,7 @@ object GithubApi {
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .baseUrl(BASE_URL)
         .build()
 
@@ -44,6 +48,6 @@ object GithubApi {
     suspend fun getContributors(page: Int): Response<List<ContributorDto>> =
         retrofitService.getContributors(page)
 
-    suspend fun getContributorDetail(loginName: String): ContributorDetailDto =
+    fun getContributorDetail(loginName: String): Single<ContributorDetailDto> =
         retrofitService.getContributorDetail(loginName)
 }
